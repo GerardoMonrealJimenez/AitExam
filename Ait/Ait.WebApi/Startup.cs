@@ -26,6 +26,8 @@ namespace Ait.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddServicesAit(Configuration.GetConnectionString("DefaultConnection"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +37,11 @@ namespace Ait.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(builder =>
+           builder.AllowAnyOrigin()
+           .AllowAnyHeader()
+           .AllowAnyMethod()
+       );
             app.UseHttpsRedirection();
 
             app.UseRouting();
