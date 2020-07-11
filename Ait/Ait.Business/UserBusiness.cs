@@ -23,7 +23,7 @@ namespace Ait.Business
             try
             {
                 var usuario = await repository.Find(c => c.Nombre == nombre && c.Password == password);
-                if (usuario == null) throw new ArgumentException($"El nombre o la contraseña no coinciden");
+                if (usuario.Count() == 0) throw new ArgumentException($"El nombre o la contraseña no coinciden");
                 response.SuccessResponse(true);
             }
             catch (Exception ex)
